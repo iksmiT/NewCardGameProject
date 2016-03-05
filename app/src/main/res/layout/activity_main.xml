@@ -7,10 +7,28 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="timski_ensicaen.newcardgameproject.MainActivity">
+    android:background="@drawable/background_ace"
+    tools:context="timski_ensicaen.newcardgameproject.MainActivity"
+>
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="PLAY"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="65dp"
+        android:layout_marginBottom="80dp"
+        android:id="@+id/play_button"
+        android:onClick="playButton"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SETTINGS"
+        android:layout_alignTop="@+id/play_button"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="56dp"
+        android:id="@+id/settings_button"
+        android:onClick="settingsButton"/>
 </RelativeLayout>
