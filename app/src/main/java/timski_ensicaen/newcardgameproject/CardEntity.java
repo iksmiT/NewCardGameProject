@@ -32,4 +32,14 @@ public class CardEntity {
     public void setState(boolean bool) {
         this.state = bool;
     }
+
+    public static int cardBattle(CardEntity cardOne, CardEntity cardTwo) {
+        if ( ((cardOne.id + 11)%13) < ((cardTwo.id + 11)%13) ) {
+            return Round.PLAYER_TWO_WINS;
+        }
+        else if ( ((cardOne.id + 11)%13) > ((cardTwo.id + 11)%13) ) {
+            return Round.PLAYER_ONE_WINS;
+        }
+        else return  Round.DRAW;
+    }
 }

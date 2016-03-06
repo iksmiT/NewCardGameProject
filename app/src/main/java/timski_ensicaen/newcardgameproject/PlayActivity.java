@@ -12,8 +12,11 @@ public class PlayActivity extends AppCompatActivity {
     int cnt = 1;
     CardDeck mCardDeck = new CardDeck();
     Round mRound = new Round();
-
-
+    CardEntity cardOne = new CardEntity(1);
+    CardEntity cardTwo = new CardEntity(2);
+    Button switchTurnButton = null;
+    ImageView cardImageOne = null;
+    ImageView cardImageTwo = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +27,10 @@ public class PlayActivity extends AppCompatActivity {
         TextView playerTwoText = (TextView) findViewById(R.id.text_two);
         Button pickDeckButtonOne = (Button) findViewById(R.id.pick_from_one);
         Button pickDeckButtonTwo = (Button) findViewById(R.id.pick_from_two);
-        turnSystem(mRound,pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
+        switchTurnButton = (Button) findViewById(R.id.next_turn_button);
+        cardImageOne = (ImageView) findViewById(R.id.image_view_one);
+        cardImageTwo = (ImageView) findViewById(R.id.image_view_two);
+        initGame(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
     }
 
     @Override
@@ -35,17 +41,17 @@ public class PlayActivity extends AppCompatActivity {
         pickDeckButtonOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cardOne = mCardDeck.pickCardEntity();
                 ImageView cardImage = (ImageView) findViewById(R.id.image_view_one);
                 TextView playerOneText = (TextView) findViewById(R.id.text_one);
                 TextView playerTwoText = (TextView) findViewById(R.id.text_two);
                 Button pickDeckButtonOne = (Button) findViewById(R.id.pick_from_one);
                 Button pickDeckButtonTwo = (Button) findViewById(R.id.pick_from_two);
 
-                CardEntity pickedCard = mCardDeck.pickCardEntity();
-                if (pickedCard != null) {
-                    displayCardEntity(cardImage, pickedCard.getId(), globalValues.customWidth, globalValues.customHeight);
+                if (cardOne != null) {
+                    displayCardEntity(cardImageOne, cardOne.getId(), globalValues.customWidth, globalValues.customHeight);
                 }
-                mRound.changeTurn();
+                //mRound.changeTurn();
                 turnSystem(mRound,pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
             }
         });
@@ -54,18 +60,19 @@ public class PlayActivity extends AppCompatActivity {
         pickDeckButtonTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageView cardImage = (ImageView) findViewById(R.id.image_view_two);
+                cardTwo = mCardDeck.pickCardEntity();
+                cardImageTwo = (ImageView) findViewById(R.id.image_view_two);
                 TextView playerOneText = (TextView) findViewById(R.id.text_one);
                 TextView playerTwoText = (TextView) findViewById(R.id.text_two);
                 Button pickDeckButtonOne = (Button) findViewById(R.id.pick_from_one);
                 Button pickDeckButtonTwo = (Button) findViewById(R.id.pick_from_two);
-                CardEntity pickedCard = mCardDeck.pickCardEntity();
 
-                if (pickedCard != null) {
-                    displayCardEntity(cardImage, pickedCard.getId(), globalValues.customWidth, globalValues.customHeight);
+
+                if (cardTwo != null) {
+                    displayCardEntity(cardImageTwo, cardTwo.getId(), globalValues.customWidth, globalValues.customHeight);
                 }
-                mRound.changeTurn();
-                turnSystem(mRound,pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
+                //mRound.changeTurn();
+                turnSystem(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
             }
         });
 
@@ -82,7 +89,7 @@ public class PlayActivity extends AppCompatActivity {
         });
 
 
-        Button switchTurnButton = (Button) findViewById(R.id.next_turn_button);
+        //Button switchTurnButton = (Button) findViewById(R.id.next_turn_button);
         switchTurnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,8 +97,9 @@ public class PlayActivity extends AppCompatActivity {
                 TextView playerTwoText = (TextView) findViewById(R.id.text_two);
                 Button pickDeckButtonOne = (Button) findViewById(R.id.pick_from_one);
                 Button pickDeckButtonTwo = (Button) findViewById(R.id.pick_from_two);
-                mRound.changeTurn();
-                turnSystem(mRound,pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
+                newRound(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
+                initGame(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
+                //turnSystem(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
             }
         });
     }
@@ -131,21 +139,81 @@ public class PlayActivity extends AppCompatActivity {
         }
     }
 
-    public void turnSystem(Round round, Button buttonOne, Button buttonTwo, TextView mTextView1, TextView mTextView2) {
-        if (round.getTurn() == Round.PLAYER_ONE_TURN ) {
+    public void initGame(Round round, Button buttonOne, Button buttonTwo, TextView mTextView1, TextView mTextView2) {
+        if (round.getTurn() == Round.PLAYER_ONE_TURN) {
             buttonTwo.setEnabled(false);
             buttonOne.setEnabled(true);
             mTextView1.setText("PLAYER ONE TURN !!!");
             mTextView2.setText("");
-        }
-        else {
+
+        } else {
             buttonOne.setEnabled(false);
             buttonTwo.setEnabled(true);
             mTextView2.setText("PLAYER TWO TURN !!!");
             mTextView1.setText("");
         }
+        switchTurnButton.setVisibility(View.GONE);
     }
 
+    public void turnSystem(Round round, Button buttonOne, Button buttonTwo, TextView mTextView1, TextView mTextView2) {
+        Log.d("TURN SYSTEM","phase = " + String.valueOf(round.getPhase()) + " play_one_played = " + String.valueOf(round.getPlayerOnePlayed()) + " player_two_played = " + String.valueOf(round.getPlayerTwoPlayed()));
+        if ( (round.getPhase() == Round.PICK_PHASE) && !((round.getPlayerOnePlayed()) && (round.getPlayerTwoPlayed()))) {
+            if (round.getTurn() == Round.PLAYER_ONE_TURN) {
+                buttonOne.setEnabled(false);
+                buttonTwo.setEnabled(true);
+                mTextView2.setText("PLAYER TWO TURN !!!");
+                mTextView1.setText("");
+                round.setTurn(Round.PLAYER_TWO_TURN);
+                round.setPlayerOnePlayed(true);
+            } else {
+                buttonTwo.setEnabled(false);
+                buttonOne.setEnabled(true);
+                mTextView1.setText("PLAYER ONE TURN !!!");
+                mTextView2.setText("");
+                round.setTurn(Round.PLAYER_ONE_TURN);
+                round.setPlayerTwoPlayed(true);
+            }
+
+            if ((round.getPlayerOnePlayed()) && (round.getPlayerTwoPlayed())) {
+                round.setPhase(Round.BATTLE_PHASE);
+
+                buttonOne.setEnabled(false);
+                buttonTwo.setEnabled(false);
+                mTextView1.setText("");
+                mTextView2.setText("");
+
+                if (cardOne == null || cardTwo == null) {
+
+                }
+                else {
+                    int winner = CardEntity.cardBattle(cardOne, cardTwo);
+                    Log.d("BATTLE PHASE", "phase = " + round.getPhase() + " play_one_played = " + String.valueOf(cardOne.getId()) + " player_two_played = " + String.valueOf(cardTwo.getId()) + " winner = " + String.valueOf(winner));
+                    if (winner == Round.PLAYER_ONE_WINS) {
+                        mTextView1.setText("PLAY ONE WINS !");
+                        mTextView2.setText("PLAY TWO LOSES !");
+                    } else if (winner == Round.PLAYER_TWO_WINS) {
+                        mTextView2.setText("PLAY TWO WINS !");
+                        mTextView1.setText("PLAY ONE LOSES !");
+                    } else {
+                        mTextView2.setText("DRAW !");
+                        mTextView1.setText("DRAW !");
+                        round.setPoint(round.getPoint() + 1);
+                    }
+                    switchTurnButton.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+        Log.d("TURN SYSTEM","phase = " + String.valueOf(round.getPhase()) + " play_one_played = " + String.valueOf(round.getPlayerOnePlayed()) + " player_two_played = " + String.valueOf(round.getPlayerTwoPlayed()));
+    }
+
+    public void newRound(Round round, Button buttonOne, Button buttonTwo, TextView mTextView1, TextView mTextView2) {
+        round.setPlayerOnePlayed(false);
+        round.setPlayerTwoPlayed(false);
+        round.setPhase(Round.PICK_PHASE);
+        cardImageOne.setImageResource(android.R.color.transparent);
+        cardImageTwo.setImageResource(android.R.color.transparent);
+        Log.d("NEW ROUND", "phase = " + String.valueOf(round.getPhase()) + " play_one_played = " + String.valueOf(round.getPlayerOnePlayed()) + " player_two_played = " + String.valueOf(round.getPlayerTwoPlayed()));
+    }
 
     public void displayCardEntity(ImageView imageView, int i, int customWidth, int customHeight) {
         switch (i) {
