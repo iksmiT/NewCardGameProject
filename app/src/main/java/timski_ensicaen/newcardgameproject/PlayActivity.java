@@ -21,8 +21,8 @@ public class PlayActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+/*
 
-        /* Randomize card (left) */
         ImageView cardImage = (ImageView) findViewById(R.id.image_card_view_rand);
         displayCardEntity(cardImage, mCard.getId(), globalValues.customWidth, globalValues.customHeight);
 
@@ -39,20 +39,32 @@ public class PlayActivity extends AppCompatActivity {
                 displayCardEntity(cardImage, rndNbr, globalValues.customWidth, globalValues.customHeight);
             }
         });
-
+*/
         Button pickDeckButton = (Button) findViewById(R.id.pick_from_deck);
         pickDeckButton.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                  ImageView cardImage = (ImageView) findViewById(R.id.image_card_view_deck);
-                  CardEntity pickedCard = mCardDeck.pickCardEntity();
-                  if (pickedCard != null) {
-                      displayCardEntity(cardImage, pickedCard.getId(), globalValues.customWidth, globalValues.customHeight);
-                  }
-              }
-          });
+            @Override
+            public void onClick(View v) {
+                ImageView cardImage = (ImageView) findViewById(R.id.image_view_deck);
+                CardEntity pickedCard = mCardDeck.pickCardEntity();
+                if (pickedCard != null) {
+                    displayCardEntity(cardImage, pickedCard.getId(), globalValues.customWidth, globalValues.customHeight);
+                }
+            }
+        });
 
-        /*  Review Cards (right) */
+        Button pickDiscardButton = (Button) findViewById(R.id.pick_from_discard);
+        pickDeckButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageView cardImage = (ImageView) findViewById(R.id.image_view_discard);
+                CardEntity pickedCard = mCardDeck.pickCardEntityFromDiscard();
+                if (pickedCard != null) {
+                    displayCardEntity(cardImage, pickedCard.getId(), globalValues.customWidth, globalValues.customHeight);
+                }
+            }
+        });
+
+        /*
         Button reviewCardButton = (Button) findViewById(R.id.review_card_button);
         reviewCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,8 +75,8 @@ public class PlayActivity extends AppCompatActivity {
                 if (cnt > globalValues.Max) cnt = 1;
             }
         });
+        */
     }
-
     @Override
     protected void onPause() {
         super.onPause();

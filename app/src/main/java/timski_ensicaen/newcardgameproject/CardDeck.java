@@ -37,7 +37,7 @@ public class CardDeck {
     public CardEntity pickCardEntity() {
         if (this.avail_deck.size() > 0) {
             int rnd = globalValues.rndFunction(globalValues.Min, this.avail_deck.size()) - 1;
-            Log.d("PICK", "pick num" + String.valueOf(rnd));
+            Log.d("DECK", "pick num" + String.valueOf(rnd));
             CardEntity tmpCard = avail_deck.get(rnd);
             this.unavail_deck.addElement(this.avail_deck.remove(rnd));
             return tmpCard;
@@ -45,10 +45,10 @@ public class CardDeck {
         else return null;
     }
 
-    public CardEntity pickCardEntityFromHeap() {
+    public CardEntity pickCardEntityFromDiscard() {
         if (this.unavail_deck.size() > 0) {
             int rnd = globalValues.rndFunction(globalValues.Min, this.unavail_deck.size()) - 1;
-            Log.d("PICK", "pick num" + String.valueOf(rnd));
+            Log.d("DISCARD", "pick num" + String.valueOf(rnd));
             CardEntity tmpCard = unavail_deck.get(rnd);
             this.avail_deck.addElement(this.unavail_deck.remove(rnd));
             return tmpCard;
