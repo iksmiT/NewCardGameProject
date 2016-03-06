@@ -6,45 +6,45 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class PlayActivity extends AppCompatActivity {
     int cnt = 1;
     CardDeck mCardDeck = new CardDeck();
-    CardEntity mCard = new CardEntity(49);
+    Round mRound = new Round();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
+
+        TextView playerOneText = (TextView) findViewById(R.id.text_one);
+        TextView playerTwoText = (TextView) findViewById(R.id.text_two);
+
+        changeTextDisplayed(playerOneText, playerTwoText, mRound);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-/*
 
-        ImageView cardImage = (ImageView) findViewById(R.id.image_card_view_rand);
-        displayCardEntity(cardImage, mCard.getId(), globalValues.customWidth, globalValues.customHeight);
-
-        ImageView randCardImage = (ImageView) findViewById(R.id.image_card_view_rand);
-        randCardImage.setImageBitmap(
-                BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.question_mark, globalValues.customWidth, globalValues.customHeight));
-
-        Button pickCardButton = (Button) findViewById(R.id.rand_card_button);
-        pickCardButton.setOnClickListener(new View.OnClickListener() {
+        Button pickDeckButtonOne = (Button) findViewById(R.id.pick_from_one);
+        pickDeckButtonOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageView cardImage = (ImageView) findViewById(R.id.image_card_view_rand);
-                int rndNbr = globalValues.rndFunction(globalValues.Min, mCardDeck.getCnt());
-                displayCardEntity(cardImage, rndNbr, globalValues.customWidth, globalValues.customHeight);
+                ImageView cardImage = (ImageView) findViewById(R.id.image_view_one);
+                CardEntity pickedCard = mCardDeck.pickCardEntity();
+                if (pickedCard != null) {
+                    displayCardEntity(cardImage, pickedCard.getId(), globalValues.customWidth, globalValues.customHeight);
+                }
             }
         });
-*/
-        Button pickDeckButton = (Button) findViewById(R.id.pick_from_deck);
-        pickDeckButton.setOnClickListener(new View.OnClickListener() {
+
+        Button pickDeckButtonTwo = (Button) findViewById(R.id.pick_from_two);
+        pickDeckButtonTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageView cardImage = (ImageView) findViewById(R.id.image_view_deck);
+                ImageView cardImage = (ImageView) findViewById(R.id.image_view_two);
                 CardEntity pickedCard = mCardDeck.pickCardEntity();
                 if (pickedCard != null) {
                     displayCardEntity(cardImage, pickedCard.getId(), globalValues.customWidth, globalValues.customHeight);
@@ -53,7 +53,7 @@ public class PlayActivity extends AppCompatActivity {
         });
 
         Button pickDiscardButton = (Button) findViewById(R.id.pick_from_discard);
-        pickDeckButton.setOnClickListener(new View.OnClickListener() {
+        pickDiscardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ImageView cardImage = (ImageView) findViewById(R.id.image_view_discard);
@@ -64,18 +64,18 @@ public class PlayActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        Button reviewCardButton = (Button) findViewById(R.id.review_card_button);
-        reviewCardButton.setOnClickListener(new View.OnClickListener() {
+
+        Button switchTurnButton = (Button) findViewById(R.id.next_turn_button);
+        switchTurnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageView cardImage = (ImageView) findViewById(R.id.image_card_view_review);
-                displayCardEntity(cardImage, cnt, globalValues.customWidth, globalValues.customHeight);
-                cnt++;
-                if (cnt > globalValues.Max) cnt = 1;
+                TextView playerOneText = (TextView) findViewById(R.id.text_one);
+                TextView playerTwoText = (TextView) findViewById(R.id.text_two);
+                mRound.changeTurn();
+                changeTextDisplayed(playerOneText, playerTwoText, mRound);
+
             }
         });
-        */
     }
     @Override
     protected void onPause() {
@@ -101,6 +101,18 @@ public class PlayActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
+    public void changeTextDisplayed(TextView mTextView1, TextView mTextView2, Round round)  {
+        if (round.getTurn() == Round.PLAYER_ONE_TURN ) {
+            mTextView1.setText("PLAYER ONE TURN !!!");
+            mTextView2.setText("");
+        }
+        else {
+            mTextView2.setText("PLAYER TWO TURN !!!");
+            mTextView1.setText("");
+        }
+    }
+
 
     public void displayCardEntity(ImageView imageView, int i, int customWidth, int customHeight) {
         switch (i) {
