@@ -1,7 +1,5 @@
 package timski_ensicaen.newcardgameproject;
 
-import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +15,7 @@ public class PlayActivity extends AppCompatActivity {
     int Max = 52;
     //CardStack mCardStack = new CardStack();
 
-    CardEntity mCardEntity = new CardEntity(getBaseContext(), 1, true);
+    //CardEntity mCardEntity = new CardEntity(getBaseContext(), 1, true);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +85,7 @@ public class PlayActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-     public void displayCardEntity(ImageView imageView, int i, int customWidth, int customHeight) {
+    public void displayCardEntity(ImageView imageView, int i, int customWidth, int customHeight) {
          Log.d("SWITCH", String.valueOf(i));
         switch (i) {
             case(1) :

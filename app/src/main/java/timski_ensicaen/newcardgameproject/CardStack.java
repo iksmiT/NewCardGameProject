@@ -9,6 +9,12 @@ public class CardStack {
     private CardEntity[] stack;
 
     public CardStack(Context base) {
-        for (int i = 1;i<52; i++) stack[i] = new CardEntity(base, i);
+        this.stack = new CardEntity[52];
+
+        for (int i=1;i<52; i++) {
+
+        }
     }
+
+
 }

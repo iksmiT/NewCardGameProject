@@ -3,9 +3,9 @@ package timski_ensicaen.newcardgameproject;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-
 /**
- * Created by Timothy Vongsana on 05/03/2016.
+ * @title BitmapCustomMethods.java
+ * @brief Bitmap processing custom functions
  */
 public class BitmapCustomMethods {
 
