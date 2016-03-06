@@ -9,53 +9,58 @@ import android.widget.ImageView;
 
 public class PlayActivity extends AppCompatActivity {
     int cnt = 1;
-    int customHeight = 96*2;
-    int customWidth = 72*2;
-    int Min = 1;
-    int Max = 52;
-    //CardStack mCardStack = new CardStack();
-
-    //CardEntity mCardEntity = new CardEntity(getBaseContext(), 1, true);
+    CardDeck mCardDeck = new CardDeck();
+    CardEntity mCard = new CardEntity(49);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        ImageView cardImage = (ImageView) findViewById(R.id.image_card_view_1);
-        cardImage.setImageBitmap(
-                BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.ace_of_spades_w720, customWidth, customHeight));
+        /* Randomize card (left) */
+        ImageView cardImage = (ImageView) findViewById(R.id.image_card_view_rand);
+        displayCardEntity(cardImage, mCard.getId(), globalValues.customWidth, globalValues.customHeight);
 
         ImageView randCardImage = (ImageView) findViewById(R.id.image_card_view_rand);
         randCardImage.setImageBitmap(
-                BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.question_mark, customWidth, customHeight));
+                BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.question_mark, globalValues.customWidth, globalValues.customHeight));
 
-        Button pickCardButton = (Button) findViewById(R.id.pick_card_button);
+        Button pickCardButton = (Button) findViewById(R.id.rand_card_button);
         pickCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageView cardImage = (ImageView) findViewById(R.id.image_card_view_1);
-                int rndNbr = Min + (int)(Math.random() * ((Max - Min) + 1));
-                displayCardEntity(cardImage, rndNbr, customWidth, customHeight);
+                ImageView cardImage = (ImageView) findViewById(R.id.image_card_view_rand);
+                int rndNbr = globalValues.rndFunction(globalValues.Min, mCardDeck.getCnt());
+                displayCardEntity(cardImage, rndNbr, globalValues.customWidth, globalValues.customHeight);
             }
         });
 
-        Button randCardButton = (Button) findViewById(R.id.rand_card_button);
-        randCardButton.setOnClickListener(new View.OnClickListener() {
+        Button pickDeckButton = (Button) findViewById(R.id.pick_from_deck);
+        pickDeckButton.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  ImageView cardImage = (ImageView) findViewById(R.id.image_card_view_deck);
+                  CardEntity pickedCard = mCardDeck.pickCardEntity();
+                  if (pickedCard != null) {
+                      displayCardEntity(cardImage, pickedCard.getId(), globalValues.customWidth, globalValues.customHeight);
+                  }
+              }
+          });
+
+        /*  Review Cards (right) */
+        Button reviewCardButton = (Button) findViewById(R.id.review_card_button);
+        reviewCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageView cardImage = (ImageView) findViewById(R.id.image_card_view_rand);
-                Log.d("ON_CLICK_RAND", "onClick: ");
-                displayCardEntity(cardImage, cnt, customWidth, customHeight);
-                Log.d("SET_IMAGE", String.valueOf(cnt));
+                ImageView cardImage = (ImageView) findViewById(R.id.image_card_view_review);
+                displayCardEntity(cardImage, cnt, globalValues.customWidth, globalValues.customHeight);
                 cnt++;
-                if (cnt > Max) cnt = 1;
+                if (cnt > globalValues.Max) cnt = 1;
             }
         });
     }
@@ -86,7 +91,6 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void displayCardEntity(ImageView imageView, int i, int customWidth, int customHeight) {
-         Log.d("SWITCH", String.valueOf(i));
         switch (i) {
             case(1) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.ace_of_diamonds_w720, customWidth, customHeight));

@@ -15,16 +15,16 @@
         android:adjustViewBounds="true"
         android:maxHeight="192dp"
         android:scaleType="fitCenter"
-        android:id="@+id/image_card_view_1"
-        android:layout_alignLeft="@+id/pick_card_button"
-        android:layout_above="@+id/pick_card_button"
+        android:id="@+id/image_card_view_rand"
+        android:layout_alignLeft="@+id/rand_card_button"
+        android:layout_above="@+id/rand_card_button"
         />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="RANDOMIZE"
-        android:id="@+id/pick_card_button"
+        android:id="@+id/rand_card_button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true" />
 
@@ -34,16 +34,34 @@
         android:adjustViewBounds="true"
         android:maxHeight="192dp"
         android:scaleType="fitCenter"
-        android:id="@+id/image_card_view_rand"
-        android:layout_above="@+id/rand_card_button"
-        android:layout_alignRight="@+id/rand_card_button" />
+        android:id="@+id/image_card_view_review"
+        android:layout_above="@+id/review_card_button"
+        android:layout_alignRight="@+id/review_card_button" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="REVIEW CARDS"
-        android:id="@+id/rand_card_button"
+        android:id="@+id/review_card_button"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxHeight="192dp"
+        android:scaleType="fitCenter"
+        android:id="@+id/image_card_view_deck"
+        android:layout_above="@+id/pick_from_deck"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PICK DECK"
+        android:id="@+id/pick_from_deck"
+        android:layout_centerInParent="true"
         android:layout_alignParentBottom="true" />
 
 </RelativeLayout>
