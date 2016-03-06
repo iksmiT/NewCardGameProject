@@ -16,40 +16,90 @@
         android:adjustViewBounds="true"
         android:maxHeight="192dp"
         android:scaleType="fitCenter"
-        android:id="@+id/image_view_deck"
-        android:layout_above="@+id/pick_from_deck"
-        android:layout_alignRight="@+id/pick_from_deck"
-
+        android:id="@+id/image_view_one"
+        android:layout_above="@+id/pick_from_one"
+        android:layout_alignLeft="@+id/pick_from_one"
+        android:src="@drawable/ace_of_clubs_w720"
         />
-
+        <!--  -->
+        />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:maxHeight="192dp"
         android:scaleType="fitCenter"
-        android:id="@+id/image_view_discard"
-        android:layout_above="@+id/pick_from_deck"
-        android:layout_alignLeft="@+id/pick_from_discard"
-        android:onClick=""
+        android:id="@+id/image_view_two"
+        android:layout_above="@+id/pick_from_two"
+        android:layout_alignRight="@+id/pick_from_two"
+        android:src="@drawable/ace_of_clubs_w720"
         />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PICK DECK"
-        android:id="@+id/pick_from_deck"
-        android:layout_marginStart="43dp"
+        android:text="PLAYER ONE"
+        android:id="@+id/pick_from_one"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PICK DISCARD"
-        android:id="@+id/pick_from_discard"
-        android:layout_marginEnd="50dp"
+        android:text="PLAYER TWO"
+        android:id="@+id/pick_from_two"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="P1 "
+        android:id="@+id/score_one_text"
+        android:textSize="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="100dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="P2 "
+        android:id="@+id/score_two_text"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/score_one_text"
+        android:textSize="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_one"
+        android:text="TEXT ONE"
+        android:layout_below="@+id/score_one_text"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_two"
+        android:text="TEXT TWO"
+        android:layout_below="@+id/score_two_text"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Next Round"
+        android:id="@+id/next_turn_button"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/end_text"
+        android:text="PLAYER X WINS"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:textSize="60dp"
+        android:textAlignment="center" />
+
 
 </RelativeLayout>
