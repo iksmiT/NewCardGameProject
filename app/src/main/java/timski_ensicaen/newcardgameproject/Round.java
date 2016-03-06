@@ -7,6 +7,8 @@ public class Round {
     private boolean playerOnePlayed;
     private boolean playerTwoPlayed;
     private int point;
+    private int playerOneScore;
+    private int playerTwoScore;
 
     public static final int PLAYER_ONE_TURN     = 1;
     public static final int PLAYER_TWO_TURN     = 2;
@@ -27,6 +29,8 @@ public class Round {
         this.playerOnePlayed = false;
         this.playerTwoPlayed = false;
         this.point = 1;
+        this.playerOneScore = 0;
+        this.playerTwoScore = 0;
     }
 
     public int getTurn() {
@@ -75,6 +79,22 @@ public class Round {
 
     public void setPoint(int pnt) {
         this.point = pnt;
+    }
+
+    public int getPlayerOneScore() {
+        return playerOneScore;
+    }
+
+    public void setPlayerOneScore(int playerOneScore) {
+        this.playerOneScore = playerOneScore;
+    }
+
+    public int getPlayerTwoScore() {
+        return playerTwoScore;
+    }
+
+    public void setPlayerTwoScore(int playerTwoScore) {
+        this.playerTwoScore = playerTwoScore;
     }
 
     public void changeTurn() {
