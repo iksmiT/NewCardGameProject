@@ -192,7 +192,8 @@ public class PlayActivity extends AppCompatActivity {
                 mTextView1.setText("");
                 mTextView2.setText("");
 
-                if (cardOne == null || cardTwo == null) {
+               // if (cardOne == null || cardTwo == null) {
+                if ((mCardDeck.getAvail_deck().size() == 0)) {
                     mTextView1.setText("");
                     mTextView2.setText("");
                     if (round.getPlayerOneScore() > round.getPlayerTwoScore()) {

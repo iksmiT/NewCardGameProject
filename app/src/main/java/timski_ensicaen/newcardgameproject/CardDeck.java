@@ -37,6 +37,17 @@ public class CardDeck {
         this.cnt = cnt;
     }
 
+    public Vector<CardEntity> getAvail_deck() {
+        return avail_deck;
+    }
+
+    public Vector<CardEntity> getPlayer_one_deck() {
+        return player_one_deck;
+    }
+
+    public Vector<CardEntity> getPlayer_two_deck() {
+        return player_two_deck;
+    }
 
     public CardEntity pickCardEntity() {
         if (this.avail_deck.size() > 0) {
@@ -45,6 +56,15 @@ public class CardDeck {
             CardEntity tmpCard = avail_deck.lastElement();
             //this.unavail_deck.addElement(this.avail_deck.remove(rnd));
             this.unavail_deck.addElement(this.avail_deck.remove(avail_deck.size()-1));
+            return tmpCard;
+        }
+        else return null;
+    }
+
+    public CardEntity pickCardEntity(Vector<CardEntity> cardDeck) {
+        if (cardDeck.size() > 0) {
+            CardEntity tmpCard = cardDeck.lastElement();
+            this.unavail_deck.addElement(cardDeck.remove(cardDeck.size()-1));
             return tmpCard;
         }
         else return null;
@@ -59,6 +79,4 @@ public class CardDeck {
         }
         else return null;
     }
-
-
 }
