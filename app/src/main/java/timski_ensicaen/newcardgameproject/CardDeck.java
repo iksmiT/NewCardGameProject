@@ -14,7 +14,7 @@ public class CardDeck {
     private int cnt;
 
     public CardDeck() {
-        for (int i=1;i<globalValues.Max; i++) {
+        for (int i=0;i<globalValues.Max; i++) {
                 avail_deck.addElement(new CardEntity(i));
         }
         cnt = globalValues.Max;
