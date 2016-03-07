@@ -24,8 +24,9 @@ public class PlayActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play);
+        Log.d("on Create 1", "cartes restantes = 1 " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + "cartes restantes 2 = " + String.valueOf(mCardDeck.getPlayer_two_deck().size()));
 
+        setContentView(R.layout.activity_play);
         TextView playerOneText = (TextView) findViewById(R.id.text_one);
         TextView playerTwoText = (TextView) findViewById(R.id.text_two);
         Button pickDeckButtonOne = (Button) findViewById(R.id.pick_from_one);
@@ -37,6 +38,7 @@ public class PlayActivity extends AppCompatActivity {
         scorePlayerTwo = (TextView) findViewById(R.id.score_two_text);
         endText = (TextView) findViewById(R.id.end_text);
         initGame(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
+        Log.d("on Create 2", "cartes restantes = 1 " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + "cartes restantes 2 = " + String.valueOf(mCardDeck.getPlayer_two_deck().size()));
     }
 
     @Override
@@ -48,6 +50,7 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cardOne = mCardDeck.pickCardEntity();
+                //cardOne = mCardDeck.pickCardEntity(mCardDeck.getPlayer_one_deck());
                 ImageView cardImage = (ImageView) findViewById(R.id.image_view_one);
                 TextView playerOneText = (TextView) findViewById(R.id.text_one);
                 TextView playerTwoText = (TextView) findViewById(R.id.text_two);
@@ -67,6 +70,7 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cardTwo = mCardDeck.pickCardEntity();
+                //cardTwo = mCardDeck.pickCardEntity(mCardDeck.getPlayer_two_deck());
                 cardImageTwo = (ImageView) findViewById(R.id.image_view_two);
                 TextView playerOneText = (TextView) findViewById(R.id.text_one);
                 TextView playerTwoText = (TextView) findViewById(R.id.text_two);
@@ -93,8 +97,8 @@ public class PlayActivity extends AppCompatActivity {
 
                 if (mRound.getPhase() != Round.FINAL_PHASE) {
                     newRound(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
-                    initGame(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
-                    //turnSystem(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
+                    //initGame(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
+                    turnSystem(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
                 } else {
                     resetGame(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
                     initGame(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
@@ -144,6 +148,7 @@ public class PlayActivity extends AppCompatActivity {
         cardImageOne.setImageResource(android.R.color.transparent);
         cardImageTwo.setImageResource(android.R.color.transparent);
         switchTurnButton.setText("NEXT ROUND");
+        Log.d("INIT 1","cartes restantes 1 = " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " cartes restantes 2 = " + String.valueOf(mCardDeck.getPlayer_two_deck().size()) );
         endText.setText("");
         if (round.getTurn() == Round.PLAYER_ONE_TURN) {
             buttonTwo.setEnabled(false);
@@ -158,6 +163,7 @@ public class PlayActivity extends AppCompatActivity {
             mTextView1.setText("");
         }
         switchTurnButton.setVisibility(View.GONE);
+        Log.d("INIT 2", "cartes restantes 1 = " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " cartes restantes 2 = " + String.valueOf(mCardDeck.getPlayer_two_deck().size()));
     }
 
     public void resetGame(Round round, Button buttonOne, Button buttonTwo, TextView mTextView1, TextView mTextView2) {
@@ -166,7 +172,7 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void turnSystem(Round round, Button buttonOne, Button buttonTwo, TextView mTextView1, TextView mTextView2) {
-        Log.d("TURN SYSTEM","phase = " + String.valueOf(round.getPhase()) + " play_one_played = " + String.valueOf(round.getPlayerOnePlayed()) + " player_two_played = " + String.valueOf(round.getPlayerTwoPlayed()));
+        Log.d("TURN SYSTEM 1","phase = " + String.valueOf(round.getPhase()) + " play_one_played = " + String.valueOf(round.getPlayerOnePlayed()) + " player_two_played = " + String.valueOf(round.getPlayerTwoPlayed()) + "cartes restantes 1 = " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " cartes restantes 2 = " + String.valueOf(mCardDeck.getPlayer_two_deck().size()));
         if ( (round.getPhase() == Round.PICK_PHASE) && !((round.getPlayerOnePlayed()) && (round.getPlayerTwoPlayed()))) {
             if (round.getTurn() == Round.PLAYER_ONE_TURN) {
                 buttonOne.setEnabled(false);
@@ -193,6 +199,8 @@ public class PlayActivity extends AppCompatActivity {
                 mTextView2.setText("");
 
                 if (cardOne == null || cardTwo == null) {
+               // if ((mCardDeck.getPlayer_one_deck().size() == 0) && (mCardDeck.getPlayer_two_deck().size() == 0) ) {
+                    Log.d("FINAL PHASE", "cartes restantes 1 = " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " cartes restantes 2 = " + String.valueOf(mCardDeck.getPlayer_two_deck().size()));
                     mTextView1.setText("");
                     mTextView2.setText("");
                     if (round.getPlayerOneScore() > round.getPlayerTwoScore()) {
@@ -225,12 +233,11 @@ public class PlayActivity extends AppCompatActivity {
                         mTextView1.setText("DRAW !");
                         round.setPoint(round.getPoint() + 1);
                     }
-
                 }
                 switchTurnButton.setVisibility(View.VISIBLE);
             }
         }
-        Log.d("TURN SYSTEM","phase = " + String.valueOf(round.getPhase()) + " play_one_played = " + String.valueOf(round.getPlayerOnePlayed()) + " player_two_played = " + String.valueOf(round.getPlayerTwoPlayed()));
+        Log.d("TURN SYSTEM 2","phase = " + String.valueOf(round.getPhase()) + " play_one_played = " + String.valueOf(round.getPlayerOnePlayed()) + " player_two_played = " + String.valueOf(round.getPlayerTwoPlayed()) + "cartes restantes 1 = " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + "cartes restantes 2 = " + String.valueOf(mCardDeck.getPlayer_two_deck().size()));
     }
 
     public void newRound(Round round, Button buttonOne, Button buttonTwo, TextView mTextView1, TextView mTextView2) {
@@ -239,166 +246,166 @@ public class PlayActivity extends AppCompatActivity {
         round.setPhase(Round.PICK_PHASE);
         cardImageOne.setImageResource(android.R.color.transparent);
         cardImageTwo.setImageResource(android.R.color.transparent);
-        Log.d("NEW ROUND", "phase = " + String.valueOf(round.getPhase()) + " play_one_played = " + String.valueOf(round.getPlayerOnePlayed()) + " player_two_played = " + String.valueOf(round.getPlayerTwoPlayed()));
+        Log.d("NEW ROUND", "phase = " + String.valueOf(round.getPhase()) + " play_one_played = " + String.valueOf(round.getPlayerOnePlayed()) + " player_two_played = " + String.valueOf(round.getPlayerTwoPlayed()) + String.valueOf(round.getPlayerTwoPlayed()) + "cartes restantes 1 =" + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + "cartes restantes 2 = " + String.valueOf(mCardDeck.getPlayer_two_deck().size()));
     }
 
     public void displayCardEntity(ImageView imageView, int i, int customWidth, int customHeight) {
         switch (i) {
             case(1) :
-                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.ace_of_diamonds_w720, customWidth, customHeight));
-                break;
-            case(2) :
-                imageView.setImageBitmap(BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.two_of_diamonds_w720, customWidth, customHeight));
-                break;
-            case(3) :
-                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.three_of_diamonds_w720, customWidth, customHeight));
-                break;
-            case(4) :
-                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.four_of_diamonds_w720, customWidth, customHeight));
-                break;
-            case(5) :
-                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.five_of_diamonds_w720, customWidth, customHeight));
-                break;
-            case(6) :
-                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.six_of_diamonds_w720, customWidth, customHeight));
-                break;
-            case(7) :
-                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.seven_of_diamonds_w720, customWidth, customHeight));
-                break;
-            case(8) :
-                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.eight_of_diamonds_w720, customWidth, customHeight));
-                break;
-            case(9) :
-                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.nine_of_diamonds_w720, customWidth, customHeight));
-                break;
-            case(10) :
-                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.ten_of_diamonds_w720, customWidth, customHeight));
-                break;
-            case(11) :
-                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.jack_of_diamonds_w720, customWidth, customHeight));
-                break;
-            case(12) :
-                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.queen_of_diamonds_w720, customWidth, customHeight));
-                break;
-            case(13) :
-                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.king_of_diamonds_w720, customWidth, customHeight));
-                break;
-            case(1+13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.ace_of_spades_w720, customWidth, customHeight));
                 break;
-            case(2+13) :
+            case(2) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.two_of_spades_w720, customWidth, customHeight));
                 break;
-            case(3+13) :
+            case(3) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.three_of_spades_w720, customWidth, customHeight));
                 break;
-            case(4+13) :
+            case(4) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.four_of_spades_w720, customWidth, customHeight));
                 break;
-            case(5+13) :
+            case(5) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.five_of_spades_w720, customWidth, customHeight));
                 break;
-            case(6+13) :
+            case(6) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.six_of_spades_w720, customWidth, customHeight));
                 break;
-            case(7+13) :
+            case(7) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.seven_of_spades_w720, customWidth, customHeight));
                 break;
-            case(8+13) :
+            case(8) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.eight_of_spades_w720, customWidth, customHeight));
                 break;
-            case(9+13) :
+            case(9) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.nine_of_spades_w720, customWidth, customHeight));
                 break;
-            case(10+13) :
+            case(10) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.ten_of_spades_w720, customWidth, customHeight));
                 break;
-            case(11+13) :
+            case(11) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.jack_of_spades_w720, customWidth, customHeight));
                 break;
-            case(12+13) :
+            case(12) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.queen_of_spades_w720, customWidth, customHeight));
                 break;
-            case(13+13) :
+            case(13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.king_of_spades_w720, customWidth, customHeight));
                 break;
-            case(1+2*13) :
+            case(1+1*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.ace_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(2+2*13) :
+            case(2+1*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.two_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(3+2*13) :
+            case(3+1*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.three_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(4+2*13) :
+            case(4+1*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.four_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(5+2*13) :
+            case(5+1*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.five_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(6+2*13) :
+            case(6+1*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.six_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(7+2*13) :
+            case(7+1*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.seven_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(8+2*13) :
+            case(8+1*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.eight_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(9+2*13) :
+            case(9+1*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.nine_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(10+2*13) :
+            case(10+1*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.ten_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(11+2*13) :
+            case(11+1*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.jack_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(12+2*13) :
+            case(12+1*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.queen_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(13+2*13) :
+            case(13+1*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.king_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(1+3*13) :
+            case(1+2*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.ace_of_hearts_w720, customWidth, customHeight));
                 break;
-            case(2+3*13) :
+            case(2+2*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.two_of_hearts_w720, customWidth, customHeight));
                 break;
-            case(3+3*13) :
+            case(3+2*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.three_of_hearts_w720, customWidth, customHeight));
                 break;
-            case(4+3*13) :
+            case(4+2*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.four_of_hearts_w720, customWidth, customHeight));
                 break;
-            case(5+3*13) :
+            case(5+2*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.five_of_hearts_w720, customWidth, customHeight));
                 break;
-            case(6+3*13) :
+            case(6+2*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.six_of_hearts_w720, customWidth, customHeight));
                 break;
-            case(7+3*13) :
+            case(7+2*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.seven_of_hearts_w720, customWidth, customHeight));
                 break;
-            case(8+3*13) :
+            case(8+2*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.eight_of_hearts_w720, customWidth, customHeight));
                 break;
-            case(9+3*13) :
+            case(9+2*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.nine_of_hearts_w720, customWidth, customHeight));
                 break;
-            case(10+3*13) :
+            case(10+2*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.ten_of_hearts_w720, customWidth, customHeight));
                 break;
-            case(11+3*13) :
+            case(11+2*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.jack_of_hearts_w720, customWidth, customHeight));
                 break;
-            case(12+3*13) :
+            case(12+2*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.queen_of_hearts_w720, customWidth, customHeight));
                 break;
-            case(13+3*13) :
+            case(13+2*13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.king_of_hearts_w720, customWidth, customHeight));
+                break;
+            case(1+3*13) :
+                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.ace_of_diamonds_w720, customWidth, customHeight));
+                break;
+            case(2+3*13) :
+                imageView.setImageBitmap(BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.two_of_diamonds_w720, customWidth, customHeight));
+                break;
+            case(3+3*13) :
+                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.three_of_diamonds_w720, customWidth, customHeight));
+                break;
+            case(4+3*13) :
+                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.four_of_diamonds_w720, customWidth, customHeight));
+                break;
+            case(5+3*13) :
+                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.five_of_diamonds_w720, customWidth, customHeight));
+                break;
+            case(6+3*13) :
+                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.six_of_diamonds_w720, customWidth, customHeight));
+                break;
+            case(7+3*13) :
+                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.seven_of_diamonds_w720, customWidth, customHeight));
+                break;
+            case(8+3*13) :
+                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.eight_of_diamonds_w720, customWidth, customHeight));
+                break;
+            case(9+3*13) :
+                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.nine_of_diamonds_w720, customWidth, customHeight));
+                break;
+            case(10+3*13) :
+                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.ten_of_diamonds_w720, customWidth, customHeight));
+                break;
+            case(11+3*13) :
+                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.jack_of_diamonds_w720, customWidth, customHeight));
+                break;
+            case(12+3*13) :
+                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.queen_of_diamonds_w720, customWidth, customHeight));
+                break;
+            case(13+3*13) :
+                imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.king_of_diamonds_w720, customWidth, customHeight));
                 break;
         }
     }

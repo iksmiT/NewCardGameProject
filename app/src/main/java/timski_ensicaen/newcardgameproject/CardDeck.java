@@ -11,24 +11,38 @@ public class CardDeck {
     private Vector<CardEntity> unavail_deck =  new Vector<>(0,1);
     private Vector<CardEntity> player_one_deck =  new Vector<>(0,1);
     private Vector<CardEntity> player_two_deck =  new Vector<>(0,1);
-    private int cnt;
 
     public CardDeck() {
-        for (int i=1;i<globalValues.Max; i++) {
+        for (int i=0;i<globalValues.Max; i++) {
                 avail_deck.addElement(new CardEntity(i));
         }
-        cnt = globalValues.Max;
         Collections.shuffle(avail_deck);
+
+        for (int i=0;i<globalValues.Max/2; i++) {
+            this.player_one_deck.addElement(new CardEntity(i+1));
+        }
+
+        for (int j=0;j<globalValues.Max/2; j++) {
+            this.player_two_deck.addElement(new CardEntity(j+1+globalValues.Max/2));
+        }
+        this.player_one_deck.set(0, new CardEntity(2));
     }
 
-    public int getCnt() {
-        return cnt;
+    public Vector<CardEntity> getAvail_deck() {
+        return avail_deck;
     }
 
-    public void setCnt(int cnt) {
-        this.cnt = cnt;
+    public Vector<CardEntity> getUnavail_deck() {
+        return unavail_deck;
     }
 
+    public Vector<CardEntity> getPlayer_one_deck() {
+        return player_one_deck;
+    }
+
+    public Vector<CardEntity> getPlayer_two_deck() {
+        return player_two_deck;
+    }
 
     public CardEntity pickCardEntity() {
         if (this.avail_deck.size() > 0) {
@@ -42,6 +56,21 @@ public class CardDeck {
         else return null;
     }
 
+    public CardEntity pickCardEntity(Vector<CardEntity> cardDeck) {
+        if (cardDeck.size() > 0) {
+            CardEntity tmpCard = cardDeck.lastElement();
+            this.unavail_deck.addElement(cardDeck.remove(cardDeck.size()-1));
+            return tmpCard;
+        }
+        else return null;
+    }
+
+    public void winHeap(Vector<CardEntity> cardDeck) {
+        for (int i = 0; i < this.unavail_deck.size(); i++) {
+            cardDeck.insertElementAt(this.unavail_deck.remove(0), 0);
+        }
+    }
+
     public CardEntity pickCardEntityFromDiscard() {
         if (this.unavail_deck.size() > 0) {
             //int rnd = globalValues.rndFunction(globalValues.Min, this.unavail_deck.size()) - 1;
@@ -51,6 +80,4 @@ public class CardDeck {
         }
         else return null;
     }
-
-
 }
