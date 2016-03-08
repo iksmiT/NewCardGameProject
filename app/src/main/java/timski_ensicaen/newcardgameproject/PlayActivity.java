@@ -234,51 +234,8 @@ public class PlayActivity extends AppCompatActivity {
                 buttonOne.setEnabled(false);
                 buttonTwo.setEnabled(false);
 
-                winner = CardEntity.cardBattle(cardOne, cardTwo);
-                Log.d("BATTLE PHASE", "phase = " + mRound.getPhase() + " play_one_played = " + String.valueOf(cardOne.getId()) + " player_two_played = " + String.valueOf(cardTwo.getId()) + " winner = " + String.valueOf(winner) + " card left one : " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " card left two : " + String.valueOf(mCardDeck.getPlayer_two_deck().size()) + " score one : " + String.valueOf(mRound.getPlayerOneScore()) + " score two : " + String.valueOf(mRound.getPlayerTwoScore()));
-                if (winner == Round.PLAYER_ONE_WINS) {
-                    mTextView1.setText("PLAY ONE SCORES !");
-                    mTextView2.setText("PLAY TWO LOSES !");
-                    //mCardDeck.pickCardEntityFromDiscard(Round.PLAYER_ONE_WINS);
-                    mRound.setPlayerOneScore(mRound.getPlayerOneScore() + mRound.getPoint());
-                    //mRound.setPlayerTwoScore(mRound.getPlayerTwoScore() - mRound.getPoint());
-                    mRound.setPoint(1);
-                } else if (winner == Round.PLAYER_TWO_WINS) {
-                    mTextView2.setText("PLAY TWO SCORES !");
-                    mTextView1.setText("PLAY ONE LOSES !");
-                    //mCardDeck.pickCardEntityFromDiscard(Round.PLAYER_TWO_WINS);
-                    mRound.setPlayerTwoScore(mRound.getPlayerTwoScore() + mRound.getPoint());
-                    //mRound.setPlayerOneScore(mRound.getPlayerOneScore() - mRound.getPoint());
-                    mRound.setPoint(1);
-                } else {
-                    mTextView2.setText("DRAW !");
-                    mTextView1.setText("DRAW !");
-                    if ((mCardDeck.getPlayer_one_deck().size() > 1) || (mCardDeck.getPlayer_two_deck().size() > 1)) {
-                        mCardDeck.pickCardEntity(mCardDeck.getPlayer_one_deck());
-                        mCardDeck.pickCardEntity(mCardDeck.getPlayer_two_deck());
-                        mRound.setPoint(mRound.getPoint() + 2);
-                    }
-                    else if ((mCardDeck.getPlayer_one_deck().size() == 1) || (mCardDeck.getPlayer_two_deck().size() == 1)) {
-                        winner = CardEntity.cardBattle(mCardDeck.pickCardEntity(mCardDeck.getPlayer_one_deck()),mCardDeck.pickCardEntity(mCardDeck.getPlayer_two_deck()));
-                        if (winner == Round.PLAYER_ONE_WINS) {
-                            mTextView1.setText("PLAY ONE SCORES !");
-                            mTextView2.setText("PLAY TWO LOSES !");
-                            mRound.setPlayerOneScore(mRound.getPlayerOneScore() + mRound.getPoint());
-                            mRound.setPoint(1);
-                        } else if (winner == Round.PLAYER_TWO_WINS) {
-                            mTextView2.setText("PLAY TWO SCORES !");
-                            mTextView1.setText("PLAY ONE LOSES !");
-                            mRound.setPlayerTwoScore(mRound.getPlayerTwoScore() + mRound.getPoint());
-                            mRound.setPoint(1);
-                        }
-                    }
-
-                }
-                scorePlayerOne.setText(String.valueOf(mRound.getPlayerOneScore()));
-                scorePlayerTwo.setText(String.valueOf(mRound.getPlayerTwoScore()));
-                switchTurnButton.setText("NEXT ROUND");
                 if ((mCardDeck.getPlayer_one_deck().size() == 0) && (mCardDeck.getPlayer_two_deck().size() == 0)) {
-                //if ((mCardDeck.getPlayer_one_deck().size() == 0) || (mCardDeck.getPlayer_one_deck().size() == 0)) {
+                    //if ((mCardDeck.getPlayer_one_deck().size() == 0) || (mCardDeck.getPlayer_one_deck().size() == 0)) {
                     if (round.getPlayerOneScore() > round.getPlayerTwoScore()) {
                         endText.setText("PLAYER 1 WINS");
                     }
@@ -288,8 +245,51 @@ public class PlayActivity extends AppCompatActivity {
                     else {endText.setText("DRAW GAME !");}
                     switchTurnButton.setText("REMATCH");
                     mRound.setPhase(Round.FINAL_PHASE);
-                    Log.d("BATTLE PHASE", "phase = " + mRound.getPhase() + " play_one_played = " + String.valueOf(cardOne.getId()) + " player_two_played = " + String.valueOf(cardTwo.getId()) + " winner = " + String.valueOf(winner) + " card left one : " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " card left two : " + String.valueOf(mCardDeck.getPlayer_two_deck().size()) + " score one : " + String.valueOf(mRound.getPlayerOneScore()) + " score two : " + String.valueOf(mRound.getPlayerTwoScore()));
+                    Log.d("BATTLE PHASE", "phase = " + mRound.getPhase() + " play_one_played = " + String.valueOf(cardOne.getId()) + " player_two_played = " + String.valueOf(cardTwo.getId()) + " card left one : " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " card left two : " + String.valueOf(mCardDeck.getPlayer_two_deck().size()) + " score one : " + String.valueOf(mRound.getPlayerOneScore()) + " score two : " + String.valueOf(mRound.getPlayerTwoScore()));
                 }
+                else {
+                    winner = CardEntity.cardBattle(cardOne, cardTwo);
+                    Log.d("BATTLE PHASE", "phase = " + mRound.getPhase() + " play_one_played = " + String.valueOf(cardOne.getId()) + " player_two_played = " + String.valueOf(cardTwo.getId()) + " winner = " + String.valueOf(winner) + " card left one : " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " card left two : " + String.valueOf(mCardDeck.getPlayer_two_deck().size()) + " score one : " + String.valueOf(mRound.getPlayerOneScore()) + " score two : " + String.valueOf(mRound.getPlayerTwoScore()));
+                    if (winner == Round.PLAYER_ONE_WINS) {
+                        mTextView1.setText("PLAY ONE SCORES !");
+                        mTextView2.setText("PLAY TWO LOSES !");
+                        //mCardDeck.pickCardEntityFromDiscard(Round.PLAYER_ONE_WINS);
+                        mRound.setPlayerOneScore(mRound.getPlayerOneScore() + mRound.getPoint());
+                        //mRound.setPlayerTwoScore(mRound.getPlayerTwoScore() - mRound.getPoint());
+                        mRound.setPoint(1);
+                    } else if (winner == Round.PLAYER_TWO_WINS) {
+                        mTextView2.setText("PLAY TWO SCORES !");
+                        mTextView1.setText("PLAY ONE LOSES !");
+                        //mCardDeck.pickCardEntityFromDiscard(Round.PLAYER_TWO_WINS);
+                        mRound.setPlayerTwoScore(mRound.getPlayerTwoScore() + mRound.getPoint());
+                        //mRound.setPlayerOneScore(mRound.getPlayerOneScore() - mRound.getPoint());
+                        mRound.setPoint(1);
+                    } else {
+                        mTextView2.setText("DRAW !");
+                        mTextView1.setText("DRAW !");
+                        if ((mCardDeck.getPlayer_one_deck().size() > 1) || (mCardDeck.getPlayer_two_deck().size() > 1)) {
+                            mCardDeck.pickCardEntity(mCardDeck.getPlayer_one_deck());
+                            mCardDeck.pickCardEntity(mCardDeck.getPlayer_two_deck());
+                            mRound.setPoint(mRound.getPoint() + 2);
+                        } else if ((mCardDeck.getPlayer_one_deck().size() == 1) || (mCardDeck.getPlayer_two_deck().size() == 1)) {
+                            winner = CardEntity.cardBattle(mCardDeck.pickCardEntity(mCardDeck.getPlayer_one_deck()), mCardDeck.pickCardEntity(mCardDeck.getPlayer_two_deck()));
+                            if (winner == Round.PLAYER_ONE_WINS) {
+                                mTextView1.setText("PLAY ONE SCORES !");
+                                mTextView2.setText("PLAY TWO LOSES !");
+                                mRound.setPlayerOneScore(mRound.getPlayerOneScore() + mRound.getPoint());
+                                mRound.setPoint(1);
+                            } else if (winner == Round.PLAYER_TWO_WINS) {
+                                mTextView2.setText("PLAY TWO SCORES !");
+                                mTextView1.setText("PLAY ONE LOSES !");
+                                mRound.setPlayerTwoScore(mRound.getPlayerTwoScore() + mRound.getPoint());
+                                mRound.setPoint(1);
+                            }
+                        }
+                    }
+                    switchTurnButton.setText("NEXT ROUND");
+                }
+                scorePlayerOne.setText(String.valueOf(mRound.getPlayerOneScore()));
+                scorePlayerTwo.setText(String.valueOf(mRound.getPlayerTwoScore()));
                 switchTurnButton.setVisibility(View.VISIBLE);
             }
         }
