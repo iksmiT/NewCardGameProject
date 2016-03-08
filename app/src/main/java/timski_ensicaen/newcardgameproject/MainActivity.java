@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
         rulesButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new AlertDialog.Builder(mContext)
-                        .setTitle("Delete entry")
-                        .setMessage("Are you sure you want to delete this entry?")
+                        .setTitle(R.string.rules_title)
+                        .setMessage(getString(R.string.rules_body) + getString(R.string.rules_end) + getString(R.string.rules_ccl))
 
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {

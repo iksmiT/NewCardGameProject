@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Jeu de la Bataille</string>
+    <string name="PLAY">JOUER</string>
+    <string name="RULES">REGLES</string>
+    <string name="SETTINGS">PARAM.</string>
+    <string name="rules_body">\nUtilisez votre chance pour défier un ami.\nÀ chaque tour, piochez une carte et comparez leur valeur. L\'AS est la plus grande carte, le DEUX est la plus faible. Rejouez si égalité ! !\n</string>
+    <string name="rules_ccl">\nBonne chance !\npar Timothy Vongsana et Quentin Simard</string>
+    <string name="rules_end">\nCelui qui remporte la mache garde les cartes jouées. Le premier à disposer de toutes les cartes gagne la partie !\n</string>
+    <string name="rules_title">Jeu de la Bataille personnalisé\n</string>
+</resources>
