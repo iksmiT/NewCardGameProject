@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">NewCardGameProject</string>
+    <string name="app_name">Card Battle Game</string>
+    <string name="rules_title"> Here\'s a custom version of the battle card game\n</string>
+    <string name="rules_body"> \nTest your chance and defy a friend.\nEach round, each of you pick a card and compare their value. ACE is the highest card, TWO the lowest one. In a draw case, keep playing !\n</string>
+    <string name="rules_end"> \nThe round winner adds its opponent\'s card to his own deck.The first one to collect all the cards wins !\n</string>
+    <string name="rules_ccl"> \nGood Luck !\nby Timothy Vongsana and Quentin Simard</string>
+    <string name="PLAY">PLAY</string>
+    <string name="SETTINGS"> SETTINGS </string>
+    <string name="RULES"> RULES </string>
 </resources>
