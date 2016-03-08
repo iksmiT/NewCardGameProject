@@ -137,11 +137,11 @@ public class PlayActivity extends AppCompatActivity {
 
     public void changeTextDisplayed(TextView mTextView1, TextView mTextView2, Round round)  {
         if (round.getTurn() == Round.PLAYER_ONE_TURN ) {
-            mTextView1.setText("PLAYER ONE TURN !!!");
+            mTextView1.setText("PLAYER ONE'S TURN !!!");
             mTextView2.setText("");
         }
         else {
-            mTextView2.setText("PLAYER TWO TURN !!!");
+            mTextView2.setText("PLAYER TWO'S TURN !!!");
             mTextView1.setText("");
         }
     }
@@ -158,13 +158,13 @@ public class PlayActivity extends AppCompatActivity {
         if (mRound.getTurn() == Round.PLAYER_ONE_TURN) {
             buttonTwo.setEnabled(false);
             buttonOne.setEnabled(true);
-            mTextView1.setText("PLAYER ONE TURN !!!");
+            mTextView1.setText("PLAYER ONE'S TURN !!!");
             mTextView2.setText("");
 
         } else {
             buttonOne.setEnabled(false);
             buttonTwo.setEnabled(true);
-            mTextView2.setText("PLAYER TWO TURN !!!");
+            mTextView2.setText("PLAYER TWO'S TURN !!!");
             mTextView1.setText("");
         }
         switchTurnButton.setVisibility(View.GONE);
@@ -183,13 +183,13 @@ public class PlayActivity extends AppCompatActivity {
         if (mRound.getTurn() == Round.PLAYER_ONE_TURN) {
             buttonTwo.setEnabled(false);
             buttonOne.setEnabled(true);
-            mTextView1.setText("PLAYER ONE TURN !!!");
+            mTextView1.setText("PLAYER ONE'S TURN !!!");
             mTextView2.setText("");
 
         } else {
             buttonOne.setEnabled(false);
             buttonTwo.setEnabled(true);
-            mTextView2.setText("PLAYER TWO TURN !!!");
+            mTextView2.setText("PLAYER TWO'S TURN !!!");
             mTextView1.setText("");
         }
         switchTurnButton.setVisibility(View.GONE);
@@ -211,7 +211,7 @@ public class PlayActivity extends AppCompatActivity {
                 Log.d("PICK PHASE", "PHASE : " + String.valueOf(mRound.getPhase()) + "| PLAYER ONE PICK " + "| PLAYER ONE STATE : " + String.valueOf(mRound.getPlayerOnePlayed()) + "| PLAYER TWO STATE : " + String.valueOf(mRound.getPlayerTwoPlayed()));
                 buttonOne.setEnabled(false);
                 buttonTwo.setEnabled(true);
-                mTextView2.setText("PLAYER TWO TURN !!!");
+                mTextView2.setText("PLAYER TWO'S TURN !!!");
                 mTextView1.setText("");
                 round.setTurn(Round.PLAYER_TWO_TURN);
                 round.setPlayerOnePlayed(true);
@@ -221,7 +221,7 @@ public class PlayActivity extends AppCompatActivity {
                 Log.d("PICK PHASE", "PHASE : " + String.valueOf(mRound.getPhase()) + "| PLAYER ONE PICK " + "| PLAYER ONE STATE : " + String.valueOf(mRound.getPlayerOnePlayed()) + "| PLAYER TWO STATE : " + String.valueOf(mRound.getPlayerTwoPlayed()));
                 buttonTwo.setEnabled(false);
                 buttonOne.setEnabled(true);
-                mTextView1.setText("PLAYER ONE TURN !!!");
+                mTextView1.setText("PLAYER ONE'S TURN !!!");
                 mTextView2.setText("");
                 round.setTurn(Round.PLAYER_ONE_TURN);
                 round.setPlayerTwoPlayed(true);
@@ -312,43 +312,43 @@ public class PlayActivity extends AppCompatActivity {
             case(13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.king_of_spades_w720, customWidth, customHeight));
                 break;
-            case(1+1*13) :
+            case(1+13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.ace_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(2+1*13) :
+            case(2+13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.two_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(3+1*13) :
+            case(3+13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.three_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(4+1*13) :
+            case(4+13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.four_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(5+1*13) :
+            case(5+13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.five_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(6+1*13) :
+            case(6+13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.six_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(7+1*13) :
+            case(7+13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.seven_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(8+1*13) :
+            case(8+13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.eight_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(9+1*13) :
+            case(9+13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.nine_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(10+1*13) :
+            case(10+13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.ten_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(11+1*13) :
+            case(11+13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.jack_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(12+1*13) :
+            case(12+13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.queen_of_clubs_w720, customWidth, customHeight));
                 break;
-            case(13+1*13) :
+            case(13+13) :
                 imageView.setImageBitmap( BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.king_of_clubs_w720, customWidth, customHeight));
                 break;
             case(1+2*13) :

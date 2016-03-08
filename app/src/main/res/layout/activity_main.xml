@@ -31,4 +31,12 @@
         android:layout_marginEnd="56dp"
         android:id="@+id/settings_button"
         android:onClick="settingsButton"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RULES"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/rules_button" />
 </RelativeLayout>

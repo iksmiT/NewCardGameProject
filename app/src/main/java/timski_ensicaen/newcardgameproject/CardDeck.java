@@ -22,13 +22,12 @@ public class CardDeck {
         for (int i=0;i<globalValues.Max/2; i++) {
             this.player_one_deck.addElement(new CardEntity(i+1));
         }
-
         for (int j=0;j<globalValues.Max/2; j++) {
             this.player_two_deck.addElement(new CardEntity(j+1+globalValues.Max/2));
         }
-        this.player_one_deck.set(0, new CardEntity(2));
+        Collections.shuffle(player_one_deck);
+        Collections.shuffle(player_two_deck);
     }
-
     public int getCnt() {
         return cnt;
     }
