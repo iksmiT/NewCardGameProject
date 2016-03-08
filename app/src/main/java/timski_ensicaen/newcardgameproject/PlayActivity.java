@@ -168,7 +168,7 @@ public class PlayActivity extends AppCompatActivity {
             mTextView1.setText("");
         }
         switchTurnButton.setVisibility(View.GONE);
-        Log.d("INIT", "INIT GAME " + "PHASE : " + String.valueOf(mRound.getPhase()) + "TURN OF " + String.valueOf(mRound.getTurn()));
+        Log.d("INIT", "INIT GAME " + "PHASE : " + String.valueOf(mRound.getPhase()) + "TURN OF " + String.valueOf(mRound.getTurn()) + " card left one : " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " card left two : " + String.valueOf(mCardDeck.getPlayer_two_deck().size()) + " score one : " + String.valueOf(mRound.getPlayerOneScore()) + " score two : " + String.valueOf(mRound.getPlayerTwoScore()));
     }
 
 
@@ -193,7 +193,7 @@ public class PlayActivity extends AppCompatActivity {
             mTextView1.setText("");
         }
         switchTurnButton.setVisibility(View.GONE);
-        Log.d("NEW ROUND", "PHASE : " + String.valueOf(mRound.getPhase()) + " play_one_played = " + String.valueOf(mRound.getPlayerOnePlayed()) + " player_two_played = " + String.valueOf(mRound.getPlayerTwoPlayed()));
+        Log.d("NEW ROUND", "PHASE : " + String.valueOf(mRound.getPhase()) + " play_one_played = " + String.valueOf(mRound.getPlayerOnePlayed()) + " player_two_played = " + String.valueOf(mRound.getPlayerTwoPlayed()) + " card left one : " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " card left two : " + String.valueOf(mCardDeck.getPlayer_two_deck().size()) + " score one : " + String.valueOf(mRound.getPlayerOneScore()) + " score two : " + String.valueOf(mRound.getPlayerTwoScore()));
     }
 
     public void resetGame(Round round, Button buttonOne, Button buttonTwo, TextView mTextView1, TextView mTextView2) {
@@ -208,24 +208,24 @@ public class PlayActivity extends AppCompatActivity {
             Log.d("PICK PHASE", "PHASE : " + String.valueOf(mRound.getPhase()));
 
             if (round.getTurn() == Round.PLAYER_ONE_TURN) {
-                Log.d("PICK PHASE", "PHASE : " + String.valueOf(mRound.getPhase()) + "| PLAYER ONE PICK " + "| PLAYER ONE STATE : " + String.valueOf(mRound.getPlayerOnePlayed()) + "| PLAYER TWO STATE : " + String.valueOf(mRound.getPlayerTwoPlayed()));
+                Log.d("PICK PHASE", "PHASE : " + String.valueOf(mRound.getPhase()) + "| PLAYER ONE PICK " + "| PLAYER ONE STATE : " + String.valueOf(mRound.getPlayerOnePlayed()) + "| PLAYER TWO STATE : " + String.valueOf(mRound.getPlayerTwoPlayed()) + " card left one : " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " card left two : " + String.valueOf(mCardDeck.getPlayer_two_deck().size()) + " score one : " + String.valueOf(mRound.getPlayerOneScore()) + " score two : " + String.valueOf(mRound.getPlayerTwoScore()));
                 buttonOne.setEnabled(false);
                 buttonTwo.setEnabled(true);
                 mTextView2.setText("PLAYER TWO'S TURN !!!");
                 mTextView1.setText("");
                 round.setTurn(Round.PLAYER_TWO_TURN);
                 round.setPlayerOnePlayed(true);
-                Log.d("PICK PHASE", "PHASE : " + String.valueOf(mRound.getPhase()) + "| PLAYER ONE PICK " + "| PLAYER ONE STATE : " + String.valueOf(mRound.getPlayerOnePlayed()) + "| PLAYER TWO STATE : " + String.valueOf(mRound.getPlayerTwoPlayed()));
+                Log.d("PICK PHASE", "PHASE : " + String.valueOf(mRound.getPhase()) + "| PLAYER ONE PICK " + "| PLAYER ONE STATE : " + String.valueOf(mRound.getPlayerOnePlayed()) + "| PLAYER TWO STATE : " + String.valueOf(mRound.getPlayerTwoPlayed()) + " card left one : " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " card left two : " + String.valueOf(mCardDeck.getPlayer_two_deck().size())+ " score one : " + String.valueOf(mRound.getPlayerOneScore()) + " score two : " + String.valueOf(mRound.getPlayerTwoScore()));
             }
             else if (round.getTurn() == Round.PLAYER_TWO_TURN) {
-                Log.d("PICK PHASE", "PHASE : " + String.valueOf(mRound.getPhase()) + "| PLAYER ONE PICK " + "| PLAYER ONE STATE : " + String.valueOf(mRound.getPlayerOnePlayed()) + "| PLAYER TWO STATE : " + String.valueOf(mRound.getPlayerTwoPlayed()));
+                Log.d("PICK PHASE", "PHASE : " + String.valueOf(mRound.getPhase()) + "| PLAYER ONE PICK " + "| PLAYER ONE STATE : " + String.valueOf(mRound.getPlayerOnePlayed()) + "| PLAYER TWO STATE : " + String.valueOf(mRound.getPlayerTwoPlayed()) + " card left one : " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " card left two : " + String.valueOf(mCardDeck.getPlayer_two_deck().size()) +" score one : "+ String.valueOf(mRound.getPlayerOneScore()) + " score two : " + String.valueOf(mRound.getPlayerTwoScore()));
                 buttonTwo.setEnabled(false);
                 buttonOne.setEnabled(true);
                 mTextView1.setText("PLAYER ONE'S TURN !!!");
                 mTextView2.setText("");
                 round.setTurn(Round.PLAYER_ONE_TURN);
                 round.setPlayerTwoPlayed(true);
-                Log.d("PICK PHASE", "PHASE : " + String.valueOf(mRound.getPhase()) + "| PLAYER ONE PICK " + "| PLAYER ONE STATE : " + String.valueOf(mRound.getPlayerOnePlayed()) + "| PLAYER TWO STATE : " + String.valueOf(mRound.getPlayerTwoPlayed()));
+                Log.d("PICK PHASE", "PHASE : " + String.valueOf(mRound.getPhase()) + "| PLAYER ONE PICK " + "| PLAYER ONE STATE : " + String.valueOf(mRound.getPlayerOnePlayed()) + "| PLAYER TWO STATE : " + String.valueOf(mRound.getPlayerTwoPlayed()) + " card left one : " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " card left two : " + String.valueOf(mCardDeck.getPlayer_two_deck().size())+ " score one : " + String.valueOf(mRound.getPlayerOneScore()) + " score two : " + String.valueOf(mRound.getPlayerTwoScore()));
             }
 
             if (round.getPlayerOnePlayed() && round.getPlayerTwoPlayed()) {
@@ -235,26 +235,50 @@ public class PlayActivity extends AppCompatActivity {
                 buttonTwo.setEnabled(false);
 
                 winner = CardEntity.cardBattle(cardOne, cardTwo);
-                Log.d("BATTLE PHASE", "phase = " + mRound.getPhase() + " play_one_played = " + String.valueOf(cardOne.getId()) + " player_two_played = " + String.valueOf(cardTwo.getId()) + " winner = " + String.valueOf(winner));
+                Log.d("BATTLE PHASE", "phase = " + mRound.getPhase() + " play_one_played = " + String.valueOf(cardOne.getId()) + " player_two_played = " + String.valueOf(cardTwo.getId()) + " winner = " + String.valueOf(winner) + " card left one : " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " card left two : " + String.valueOf(mCardDeck.getPlayer_two_deck().size()) + " score one : " + String.valueOf(mRound.getPlayerOneScore()) + " score two : " + String.valueOf(mRound.getPlayerTwoScore()));
                 if (winner == Round.PLAYER_ONE_WINS) {
                     mTextView1.setText("PLAY ONE SCORES !");
                     mTextView2.setText("PLAY TWO LOSES !");
+                    //mCardDeck.pickCardEntityFromDiscard(Round.PLAYER_ONE_WINS);
                     mRound.setPlayerOneScore(mRound.getPlayerOneScore() + mRound.getPoint());
-                    scorePlayerOne.setText(String.valueOf(mRound.getPlayerOneScore()));
+                    //mRound.setPlayerTwoScore(mRound.getPlayerTwoScore() - mRound.getPoint());
                     mRound.setPoint(1);
                 } else if (winner == Round.PLAYER_TWO_WINS) {
                     mTextView2.setText("PLAY TWO SCORES !");
                     mTextView1.setText("PLAY ONE LOSES !");
+                    //mCardDeck.pickCardEntityFromDiscard(Round.PLAYER_TWO_WINS);
                     mRound.setPlayerTwoScore(mRound.getPlayerTwoScore() + mRound.getPoint());
-                    scorePlayerTwo.setText(String.valueOf(mRound.getPlayerTwoScore()));
+                    //mRound.setPlayerOneScore(mRound.getPlayerOneScore() - mRound.getPoint());
                     mRound.setPoint(1);
                 } else {
                     mTextView2.setText("DRAW !");
                     mTextView1.setText("DRAW !");
-                    mRound.setPoint(mRound.getPoint() + 1);
+                    if ((mCardDeck.getPlayer_one_deck().size() > 1) || (mCardDeck.getPlayer_two_deck().size() > 1)) {
+                        mCardDeck.pickCardEntity(mCardDeck.getPlayer_one_deck());
+                        mCardDeck.pickCardEntity(mCardDeck.getPlayer_two_deck());
+                        mRound.setPoint(mRound.getPoint() + 2);
+                    }
+                    else if ((mCardDeck.getPlayer_one_deck().size() == 1) || (mCardDeck.getPlayer_two_deck().size() == 1)) {
+                        winner = CardEntity.cardBattle(mCardDeck.pickCardEntity(mCardDeck.getPlayer_one_deck()),mCardDeck.pickCardEntity(mCardDeck.getPlayer_two_deck()));
+                        if (winner == Round.PLAYER_ONE_WINS) {
+                            mTextView1.setText("PLAY ONE SCORES !");
+                            mTextView2.setText("PLAY TWO LOSES !");
+                            mRound.setPlayerOneScore(mRound.getPlayerOneScore() + mRound.getPoint());
+                            mRound.setPoint(1);
+                        } else if (winner == Round.PLAYER_TWO_WINS) {
+                            mTextView2.setText("PLAY TWO SCORES !");
+                            mTextView1.setText("PLAY ONE LOSES !");
+                            mRound.setPlayerTwoScore(mRound.getPlayerTwoScore() + mRound.getPoint());
+                            mRound.setPoint(1);
+                        }
+                    }
+
                 }
+                scorePlayerOne.setText(String.valueOf(mRound.getPlayerOneScore()));
+                scorePlayerTwo.setText(String.valueOf(mRound.getPlayerTwoScore()));
                 switchTurnButton.setText("NEXT ROUND");
-                if ((mCardDeck.getPlayer_one_deck().size()) == 0 && (mCardDeck.getPlayer_one_deck().size() == 0)) {
+                if ((mCardDeck.getPlayer_one_deck().size() == 0) && (mCardDeck.getPlayer_two_deck().size() == 0)) {
+                //if ((mCardDeck.getPlayer_one_deck().size() == 0) || (mCardDeck.getPlayer_one_deck().size() == 0)) {
                     if (round.getPlayerOneScore() > round.getPlayerTwoScore()) {
                         endText.setText("PLAYER 1 WINS");
                     }
@@ -264,6 +288,7 @@ public class PlayActivity extends AppCompatActivity {
                     else {endText.setText("DRAW GAME !");}
                     switchTurnButton.setText("REMATCH");
                     mRound.setPhase(Round.FINAL_PHASE);
+                    Log.d("BATTLE PHASE", "phase = " + mRound.getPhase() + " play_one_played = " + String.valueOf(cardOne.getId()) + " player_two_played = " + String.valueOf(cardTwo.getId()) + " winner = " + String.valueOf(winner) + " card left one : " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " card left two : " + String.valueOf(mCardDeck.getPlayer_two_deck().size()) + " score one : " + String.valueOf(mRound.getPlayerOneScore()) + " score two : " + String.valueOf(mRound.getPlayerTwoScore()));
                 }
                 switchTurnButton.setVisibility(View.VISIBLE);
             }

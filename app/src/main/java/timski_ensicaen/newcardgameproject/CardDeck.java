@@ -19,14 +19,18 @@ public class CardDeck {
         }
         cnt = globalValues.Max;
         Collections.shuffle(avail_deck);
-        for (int i=0;i<globalValues.Max/2; i++) {
+        for (int i=0;i<globalValues.Max/4; i++) {
             this.player_one_deck.addElement(new CardEntity(i+1));
         }
-        for (int j=0;j<globalValues.Max/2; j++) {
+        for (int j=0;j<globalValues.Max/4; j++) {
             this.player_two_deck.addElement(new CardEntity(j+1+globalValues.Max/2));
         }
-        Collections.shuffle(player_one_deck);
-        Collections.shuffle(player_two_deck);
+        //Collections.shuffle(player_one_deck);
+        //Collections.shuffle(player_two_deck);
+        player_one_deck.add(0, new CardEntity(1));
+        player_two_deck.add(0, new CardEntity(2));
+        player_one_deck.add(1, new CardEntity(1));
+        player_two_deck.add(1, new CardEntity(2));
     }
     public int getCnt() {
         return cnt;
@@ -60,6 +64,18 @@ public class CardDeck {
         else return null;
     }
 
+    public CardEntity pickRandomCardEntity() {
+        if (this.avail_deck.size() > 0) {
+            //int rnd = globalValues.rndFunction(globalValues.Min, this.avail_deck.size()) - 1;
+            //CardEntity tmpCard = avail_deck.get(rnd);
+            CardEntity tmpCard = avail_deck.lastElement();
+            //this.unavail_deck.addElement(this.avail_deck.remove(rnd));
+            this.unavail_deck.addElement(this.avail_deck.remove(avail_deck.size()-1));
+            return tmpCard;
+        }
+        else return null;
+    }
+
     public CardEntity pickCardEntity(Vector<CardEntity> cardDeck) {
         if (cardDeck.size() > 0) {
             CardEntity tmpCard = cardDeck.lastElement();
@@ -69,13 +85,24 @@ public class CardDeck {
         else return null;
     }
 
-    public CardEntity pickCardEntityFromDiscard() {
+    public void pickCardEntityFromDiscard() {
         if (this.unavail_deck.size() > 0) {
             //int rnd = globalValues.rndFunction(globalValues.Min, this.unavail_deck.size()) - 1;
             CardEntity tmpCard = unavail_deck.lastElement();
-            this.avail_deck.insertElementAt(this.unavail_deck.remove(unavail_deck.size()-1),0);
-            return tmpCard;
+            this.avail_deck.insertElementAt(this.unavail_deck.remove(unavail_deck.size() - 1), 0);
         }
-        else return null;
+    }
+
+    public CardEntity pickCardEntityFromDiscard(int i) {
+        while (this.unavail_deck.size() > 0) {
+            if (i == Round.PLAYER_ONE_WINS) {
+                this.player_one_deck.insertElementAt(this.unavail_deck.remove(0), 0);
+            }
+            else if (i == Round.PLAYER_TWO_WINS) {
+                this.player_two_deck.insertElementAt(this.unavail_deck.remove(0), 0);
+            }
+        }
+        return null;
     }
 }
+
