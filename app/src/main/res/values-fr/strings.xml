@@ -23,6 +23,8 @@
     <string name="APPLY">Appliquer</string>
     <string name="fr_select">Vous avez sélectionné Français</string>
     <string name="en_select">Vous avez sélectionné Anglais</string>
+    <string name="PLAYER_ONE">JOUEUR UN</string>
+    <string name="PLAYER_TWO">JOUEUR DEUX</string>
     <string-array name="Languages_array">
         <item>Français</item>
         <item>Anglais</item>
