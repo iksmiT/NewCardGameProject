@@ -60,6 +60,18 @@ public class CardDeck {
         else return null;
     }
 
+    public CardEntity pickRandomCardEntity() {
+        if (this.avail_deck.size() > 0) {
+            //int rnd = globalValues.rndFunction(globalValues.Min, this.avail_deck.size()) - 1;
+            //CardEntity tmpCard = avail_deck.get(rnd);
+            CardEntity tmpCard = avail_deck.lastElement();
+            //this.unavail_deck.addElement(this.avail_deck.remove(rnd));
+            this.unavail_deck.addElement(this.avail_deck.remove(avail_deck.size()-1));
+            return tmpCard;
+        }
+        else return null;
+    }
+
     public CardEntity pickCardEntity(Vector<CardEntity> cardDeck) {
         if (cardDeck.size() > 0) {
             CardEntity tmpCard = cardDeck.lastElement();
@@ -69,13 +81,24 @@ public class CardDeck {
         else return null;
     }
 
-    public CardEntity pickCardEntityFromDiscard() {
+    public void pickCardEntityFromDiscard() {
         if (this.unavail_deck.size() > 0) {
             //int rnd = globalValues.rndFunction(globalValues.Min, this.unavail_deck.size()) - 1;
             CardEntity tmpCard = unavail_deck.lastElement();
-            this.avail_deck.insertElementAt(this.unavail_deck.remove(unavail_deck.size()-1),0);
-            return tmpCard;
+            this.avail_deck.insertElementAt(this.unavail_deck.remove(unavail_deck.size() - 1), 0);
         }
-        else return null;
+    }
+
+    public CardEntity pickCardEntityFromDiscard(int i) {
+        while (this.unavail_deck.size() > 0) {
+            if (i == Round.PLAYER_ONE_WINS) {
+                this.player_one_deck.insertElementAt(this.unavail_deck.remove(0), 0);
+            }
+            else if (i == Round.PLAYER_TWO_WINS) {
+                this.player_two_deck.insertElementAt(this.unavail_deck.remove(0), 0);
+            }
+        }
+        return null;
     }
 }
+
