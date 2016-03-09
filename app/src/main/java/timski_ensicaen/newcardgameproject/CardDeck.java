@@ -19,18 +19,14 @@ public class CardDeck {
         }
         cnt = globalValues.Max;
         Collections.shuffle(avail_deck);
-        for (int i=0;i<globalValues.Max/4; i++) {
+        for (int i=0;i<globalValues.Max/2; i++) {
             this.player_one_deck.addElement(new CardEntity(i+1));
         }
-        for (int j=0;j<globalValues.Max/4; j++) {
+        for (int j=0;j<globalValues.Max/2; j++) {
             this.player_two_deck.addElement(new CardEntity(j+1+globalValues.Max/2));
         }
-        //Collections.shuffle(player_one_deck);
-        //Collections.shuffle(player_two_deck);
-        player_one_deck.add(0, new CardEntity(1));
-        player_two_deck.add(0, new CardEntity(2));
-        player_one_deck.add(1, new CardEntity(1));
-        player_two_deck.add(1, new CardEntity(2));
+        Collections.shuffle(player_one_deck);
+        Collections.shuffle(player_two_deck);
     }
     public int getCnt() {
         return cnt;
