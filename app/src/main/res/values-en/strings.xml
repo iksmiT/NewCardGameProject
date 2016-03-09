@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BATTLE GAME</string>
+    <string name="PLAY">PLAY</string>
+    <string name="RULES">RULES</string>
+    <string name="SETTINGS">SETTINGS</string>
+    <string name="DRAW">DRAW</string>
+    <string name="rules_body">\nUse your luck to defy a friend.\nEach turn, draw a card a compare its value. Ace is the most valuable, TWO is the least valuable. Play again in case of draw\n</string>
+    <string name="rules_ccl">\nGood luck !\nby Timothy Vongsana and Quentin Simard</string>
+    <string name="rules_end">\nThe one who wins keeps the cards of the turn. The first player to own all the cards wins\n</string>
+    <string name="rules_title">Customized battle game\n</string>
+    <string name="turn_p1">PLAYER ONE TURN !!!</string>
+    <string name="turn_p2">PLAYER TWO TURN !!!</string>
+    <string name="NEXT_ROUND">NEXT TURN</string>
+    <string name="p1_score">PLAYER ONE SCORES</string>
+    <string name="p1_lose">PLAYER ONE LOSES</string>
+    <string name="p2_score">PLAYER TWO SCORES</string>
+    <string name="p2_lose">PLAYER TWO LOSES</string>
+    <string name="REMATCH">REMATCH</string>
+    <string name="LANGUAGE">LANGUAGE</string>
+    <string name="BACKSCREEN">BACKSCREEN</string>
+    <string name="spinner_prompt">Select a language</string>
+    <string name="APPLY">Apply</string>
+    <string name="fr_select">You have selected French</string>
+    <string name="en_select">You have selected English</string>
+    <string-array name="Languages_array">
+        <item>French</item>
+        <item>English</item>
+    </string-array>
+</resources>
