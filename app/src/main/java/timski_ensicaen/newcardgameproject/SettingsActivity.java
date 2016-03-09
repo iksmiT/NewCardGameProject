@@ -63,7 +63,7 @@ public class SettingsActivity extends AppCompatActivity {
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
-        Intent refresh = new Intent(this, SettingsActivity.class);
-        startActivity(refresh);
+        finish();
+        startActivity(getIntent());
     }
 }
