@@ -4,8 +4,27 @@
     <string name="PLAY">JOUER</string>
     <string name="RULES">REGLES</string>
     <string name="SETTINGS">PARAM.</string>
+    <string name="DRAW">Egalité !</string>
     <string name="rules_body">\nUtilisez votre chance pour défier un ami.\nÀ chaque tour, piochez une carte et comparez leur valeur. L\'AS est la plus grande carte, le DEUX est la plus faible. Rejouez si égalité ! !\n</string>
     <string name="rules_ccl">\nBonne chance !\npar Timothy Vongsana et Quentin Simard</string>
     <string name="rules_end">\nCelui qui remporte la mache garde les cartes jouées. Le premier à disposer de toutes les cartes gagne la partie !\n</string>
     <string name="rules_title">Jeu de la Bataille personnalisé\n</string>
+    <string name="turn_p1">TOUR DU JOUEUR 1 !!!</string>
+    <string name="turn_p2">TOUR DU JOUEUR 2 !!!</string>
+    <string name="NEXT_ROUND">TOUR SUIVANT</string>
+    <string name="p1_score">JOUEUR 1 MARQUE</string>
+    <string name="p1_lose">JOUEUR 1 PERD</string>
+    <string name="p2_score">JOUEUR 2 MARQUE</string>
+    <string name="p2_lose">JOUEUR 2 PERD</string>
+    <string name="REMATCH">RECOMMENCER</string>
+    <string name="LANGUAGE">LANGAGE</string>
+    <string name="BACKSCREEN">ECRAN</string>
+    <string name="spinner_prompt">Selectionner une langue</string>
+    <string name="APPLY">Appliquer</string>
+    <string name="fr_select">Vous avez sélectionné Français</string>
+    <string name="en_select">Vous avez sélectionné Anglais</string>
+    <string-array name="Languages_array">
+        <item>Français</item>
+        <item>Anglais</item>
+    </string-array>
 </resources>

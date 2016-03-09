@@ -137,11 +137,11 @@ public class PlayActivity extends AppCompatActivity {
 
     public void changeTextDisplayed(TextView mTextView1, TextView mTextView2, Round round)  {
         if (round.getTurn() == Round.PLAYER_ONE_TURN ) {
-            mTextView1.setText("PLAYER ONE'S TURN !!!");
+            mTextView1.setText(R.string.turn_p1);
             mTextView2.setText("");
         }
         else {
-            mTextView2.setText("PLAYER TWO'S TURN !!!");
+            mTextView2.setText(R.string.turn_p2);
             mTextView1.setText("");
         }
     }
@@ -153,18 +153,18 @@ public class PlayActivity extends AppCompatActivity {
         scorePlayerTwo.setText(String.valueOf(mRound.getPlayerTwoScore()));
         cardImageOne.setImageResource(android.R.color.transparent);
         cardImageTwo.setImageResource(android.R.color.transparent);
-        switchTurnButton.setText("NEXT ROUND");
+        switchTurnButton.setText(R.string.NEXT_ROUND);
         endText.setText("");
         if (mRound.getTurn() == Round.PLAYER_ONE_TURN) {
             buttonTwo.setEnabled(false);
             buttonOne.setEnabled(true);
-            mTextView1.setText("PLAYER ONE'S TURN !!!");
+            mTextView1.setText(R.string.turn_p1);
             mTextView2.setText("");
 
         } else {
             buttonOne.setEnabled(false);
             buttonTwo.setEnabled(true);
-            mTextView2.setText("PLAYER TWO'S TURN !!!");
+            mTextView2.setText(R.string.turn_p2);
             mTextView1.setText("");
         }
         switchTurnButton.setVisibility(View.GONE);
@@ -183,13 +183,13 @@ public class PlayActivity extends AppCompatActivity {
         if (mRound.getTurn() == Round.PLAYER_ONE_TURN) {
             buttonTwo.setEnabled(false);
             buttonOne.setEnabled(true);
-            mTextView1.setText("PLAYER ONE'S TURN !!!");
+            mTextView1.setText(R.string.turn_p1);
             mTextView2.setText("");
 
         } else {
             buttonOne.setEnabled(false);
             buttonTwo.setEnabled(true);
-            mTextView2.setText("PLAYER TWO'S TURN !!!");
+            mTextView2.setText(R.string.turn_p2);
             mTextView1.setText("");
         }
         switchTurnButton.setVisibility(View.GONE);
@@ -211,7 +211,7 @@ public class PlayActivity extends AppCompatActivity {
                 Log.d("PICK PHASE", "PHASE : " + String.valueOf(mRound.getPhase()) + "| PLAYER ONE PICK " + "| PLAYER ONE STATE : " + String.valueOf(mRound.getPlayerOnePlayed()) + "| PLAYER TWO STATE : " + String.valueOf(mRound.getPlayerTwoPlayed()));
                 buttonOne.setEnabled(false);
                 buttonTwo.setEnabled(true);
-                mTextView2.setText("PLAYER TWO'S TURN !!!");
+                mTextView2.setText(R.string.turn_p2);
                 mTextView1.setText("");
                 round.setTurn(Round.PLAYER_TWO_TURN);
                 round.setPlayerOnePlayed(true);
@@ -221,7 +221,7 @@ public class PlayActivity extends AppCompatActivity {
                 Log.d("PICK PHASE", "PHASE : " + String.valueOf(mRound.getPhase()) + "| PLAYER ONE PICK " + "| PLAYER ONE STATE : " + String.valueOf(mRound.getPlayerOnePlayed()) + "| PLAYER TWO STATE : " + String.valueOf(mRound.getPlayerTwoPlayed()));
                 buttonTwo.setEnabled(false);
                 buttonOne.setEnabled(true);
-                mTextView1.setText("PLAYER ONE'S TURN !!!");
+                mTextView1.setText(R.string.turn_p1);
                 mTextView2.setText("");
                 round.setTurn(Round.PLAYER_ONE_TURN);
                 round.setPlayerTwoPlayed(true);
@@ -237,32 +237,32 @@ public class PlayActivity extends AppCompatActivity {
                 winner = CardEntity.cardBattle(cardOne, cardTwo);
                 Log.d("BATTLE PHASE", "phase = " + mRound.getPhase() + " play_one_played = " + String.valueOf(cardOne.getId()) + " player_two_played = " + String.valueOf(cardTwo.getId()) + " winner = " + String.valueOf(winner));
                 if (winner == Round.PLAYER_ONE_WINS) {
-                    mTextView1.setText("PLAY ONE SCORES !");
-                    mTextView2.setText("PLAY TWO LOSES !");
+                    mTextView1.setText(R.string.p1_score);
+                    mTextView2.setText(R.string.p2_lose);
                     mRound.setPlayerOneScore(mRound.getPlayerOneScore() + mRound.getPoint());
                     scorePlayerOne.setText(String.valueOf(mRound.getPlayerOneScore()));
                     mRound.setPoint(1);
                 } else if (winner == Round.PLAYER_TWO_WINS) {
-                    mTextView2.setText("PLAY TWO SCORES !");
-                    mTextView1.setText("PLAY ONE LOSES !");
+                    mTextView2.setText(R.string.p2_score);
+                    mTextView1.setText(R.string.p1_lose);
                     mRound.setPlayerTwoScore(mRound.getPlayerTwoScore() + mRound.getPoint());
                     scorePlayerTwo.setText(String.valueOf(mRound.getPlayerTwoScore()));
                     mRound.setPoint(1);
                 } else {
-                    mTextView2.setText("DRAW !");
-                    mTextView1.setText("DRAW !");
+                    mTextView2.setText(R.string.DRAW);
+                    mTextView1.setText(R.string.DRAW);
                     mRound.setPoint(mRound.getPoint() + 1);
                 }
-                switchTurnButton.setText("NEXT ROUND");
+                switchTurnButton.setText(R.string.NEXT_ROUND);
                 if ((mCardDeck.getPlayer_one_deck().size()) == 0 && (mCardDeck.getPlayer_one_deck().size() == 0)) {
                     if (round.getPlayerOneScore() > round.getPlayerTwoScore()) {
-                        endText.setText("PLAYER 1 WINS");
+                        endText.setText(R.string.p1_score);
                     }
                     else if (round.getPlayerTwoScore() > round.getPlayerOneScore()) {
-                        endText.setText("PLAYER 2 WINS");
+                        endText.setText(R.string.p2_score);
                     }
-                    else {endText.setText("DRAW GAME !");}
-                    switchTurnButton.setText("REMATCH");
+                    else {endText.setText(R.string.DRAW);}
+                    switchTurnButton.setText(R.string.REMATCH);
                     mRound.setPhase(Round.FINAL_PHASE);
                 }
                 switchTurnButton.setVisibility(View.VISIBLE);
