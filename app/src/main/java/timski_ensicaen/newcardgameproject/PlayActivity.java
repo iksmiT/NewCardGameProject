@@ -48,7 +48,6 @@ public class PlayActivity extends AppCompatActivity {
         pickDeckButtonOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //cardOne = mCardDeck.pickCardEntity();
                 cardOne = mCardDeck.pickCardEntity(mCardDeck.getPlayer_one_deck());
                 ImageView cardImage = (ImageView) findViewById(R.id.image_view_one);
                 TextView playerOneText = (TextView) findViewById(R.id.text_one);
@@ -59,7 +58,6 @@ public class PlayActivity extends AppCompatActivity {
                 if (cardOne != null) {
                     displayCardEntity(cardImageOne, cardOne.getId(), globalValues.customWidth, globalValues.customHeight);
                 }
-                //mRound.changeTurn();
                 turnSystem(mRound,pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
             }
         });
@@ -68,7 +66,6 @@ public class PlayActivity extends AppCompatActivity {
         pickDeckButtonTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //cardTwo = mCardDeck.pickCardEntity();
                 cardTwo = mCardDeck.pickCardEntity(mCardDeck.getPlayer_two_deck());
                 cardImageTwo = (ImageView) findViewById(R.id.image_view_two);
                 TextView playerOneText = (TextView) findViewById(R.id.text_one);
@@ -79,13 +76,10 @@ public class PlayActivity extends AppCompatActivity {
                 if (cardTwo != null) {
                     displayCardEntity(cardImageTwo, cardTwo.getId(), globalValues.customWidth, globalValues.customHeight);
                 }
-                //mRound.changeTurn();
                 turnSystem(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
             }
         });
 
-
-        //Button switchTurnButton = (Button) findViewById(R.id.next_turn_button);
         switchTurnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,13 +88,11 @@ public class PlayActivity extends AppCompatActivity {
                 Button pickDeckButtonOne = (Button) findViewById(R.id.pick_from_one);
                 Button pickDeckButtonTwo = (Button) findViewById(R.id.pick_from_two);
 
-                //if (mRound.getPhase() != Round.FINAL_PHASE) {
                 if ((mRound.getPhase() == Round.PICK_PHASE)) {
                     newRound(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
                 } else if ((mRound.getPhase() == Round.BATTLE_PHASE)) {
                     newRound(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
                 } else {
-                    //resetGame(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
                     initGame(mRound, pickDeckButtonOne, pickDeckButtonTwo, playerOneText, playerTwoText);
                 }
             }
@@ -129,17 +121,6 @@ public class PlayActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    }
-
-    public void changeTextDisplayed(TextView mTextView1, TextView mTextView2, Round round)  {
-        if (round.getTurn() == Round.PLAYER_ONE_TURN ) {
-            mTextView1.setText("PLAYER ONE'S TURN !!!");
-            mTextView2.setText("");
-        }
-        else {
-            mTextView2.setText("PLAYER TWO'S TURN !!!");
-            mTextView1.setText("");
-        }
     }
 
     public void initGame(Round round, Button buttonOne, Button buttonTwo, TextView mTextView1, TextView mTextView2) {
@@ -192,11 +173,6 @@ public class PlayActivity extends AppCompatActivity {
         Log.d("NEW ROUND", "PHASE : " + String.valueOf(mRound.getPhase()) + " play_one_played = " + String.valueOf(mRound.getPlayerOnePlayed()) + " player_two_played = " + String.valueOf(mRound.getPlayerTwoPlayed()) + " card left one : " + String.valueOf(mCardDeck.getPlayer_one_deck().size()) + " card left two : " + String.valueOf(mCardDeck.getPlayer_two_deck().size()) + " score one : " + String.valueOf(mRound.getPlayerOneScore()) + " score two : " + String.valueOf(mRound.getPlayerTwoScore()));
     }
 
-    public void resetGame(Round round, Button buttonOne, Button buttonTwo, TextView mTextView1, TextView mTextView2) {
-        mCardDeck = new CardDeck();
-        mRound = new Round();
-    }
-
     public void turnSystem(Round round, Button buttonOne, Button buttonTwo, TextView mTextView1, TextView mTextView2) {
         Log.d("TURN SYSTEM", "PHASE : " + String.valueOf(mRound.getPhase()));
         int winner;
@@ -244,7 +220,6 @@ public class PlayActivity extends AppCompatActivity {
                         mTextView2.setText("DRAW !");
                         mTextView1.setText("DRAW !");
                     }
-                    //if ((mCardDeck.getPlayer_one_deck().size() == 0) || (mCardDeck.getPlayer_one_deck().size() == 0)) {
                     if (round.getPlayerOneScore() > round.getPlayerTwoScore()) {
                         endText.setText("PLAYER 1 WINS");
                     } else if (round.getPlayerTwoScore() > round.getPlayerOneScore()) {
@@ -261,16 +236,12 @@ public class PlayActivity extends AppCompatActivity {
                     if (winner == Round.PLAYER_ONE_WINS) {
                         mTextView1.setText("PLAY ONE SCORES !");
                         mTextView2.setText("PLAY TWO LOSES !");
-                        //mCardDeck.pickCardEntityFromDiscard(Round.PLAYER_ONE_WINS);
                         mRound.setPlayerOneScore(mRound.getPlayerOneScore() + mRound.getPoint());
-                        //mRound.setPlayerTwoScore(mRound.getPlayerTwoScore() - mRound.getPoint());
                         mRound.setPoint(1);
                     } else if (winner == Round.PLAYER_TWO_WINS) {
                         mTextView2.setText("PLAY TWO SCORES !");
                         mTextView1.setText("PLAY ONE LOSES !");
-                        //mCardDeck.pickCardEntityFromDiscard(Round.PLAYER_TWO_WINS);
                         mRound.setPlayerTwoScore(mRound.getPlayerTwoScore() + mRound.getPoint());
-                        //mRound.setPlayerOneScore(mRound.getPlayerOneScore() - mRound.getPoint());
                         mRound.setPoint(1);
                     } else {
                         mTextView2.setText("DRAW !");
@@ -308,8 +279,6 @@ public class PlayActivity extends AppCompatActivity {
             }
         }
     }
-
-
 
     public void displayCardEntity(ImageView imageView, int i, int customWidth, int customHeight) {
         switch (i) {
@@ -472,7 +441,6 @@ public class PlayActivity extends AppCompatActivity {
             default: {
                 Log.d("EXCEPTION SWITCH", "carte no : " + String.valueOf(i));
             }
-
         }
     }
 }
