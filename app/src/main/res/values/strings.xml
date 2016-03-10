@@ -8,7 +8,7 @@
     <string name="PLAYER_TWO">PLAYER TWO</string>
     <string name="rules_body">\nUse your luck to defy a friend.\nEach turn, draw a card a compare its value. Ace is the most valuable, TWO is the least valuable. Play again in case of draw\n</string>
     <string name="rules_ccl">\nGood luck !\nby Timothy Vongsana and Quentin Simard</string>
-    <string name="rules_end">\nThe one who wins keeps the cards of the turn. The first player to own all the cards wins\n</string>
+    <string name="rules_end">\nWhen there is no more card left, the one with the highest score wins the game !\n</string>
     <string name="rules_title">Customized battle game\n</string>
     <string name="turn_p1">PLAYER ONE TURN !!!</string>
     <string name="turn_p2">PLAYER TWO TURN !!!</string>

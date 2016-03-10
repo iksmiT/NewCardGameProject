@@ -17,8 +17,6 @@ import android.util.DisplayMetrics;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 
-
-
 public class SettingsActivity extends AppCompatActivity {
 
     Locale myLocale;

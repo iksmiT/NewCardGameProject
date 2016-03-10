@@ -20,12 +20,8 @@ import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
     final int sdk = android.os.Build.VERSION.SDK_INT;
-    int customHeight = 96*2;
-    int customWidth = 72*2;
-    boolean click = true;
     PopupWindow popUp;
     RelativeLayout mainLayout;
-    ViewGroup.LayoutParams params;
     Context mContext;
 
     @Override
@@ -34,15 +30,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-
-
     @Override
     protected void onStart() {
         super.onStart();
 
         mContext = this;
         mainLayout = (RelativeLayout) findViewById(R.id.main_relative_layout);
-        Bitmap BackgroundBitmap = BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.background_ace, customWidth, customHeight);
+        Bitmap BackgroundBitmap = BitmapCustomMethods.decodeSampledBitmapFromResource(getResources(), R.drawable.background_ace, globalValues.customWidth, globalValues.customHeight);
         Drawable BackgroundDrawable = new BitmapDrawable(getResources(), BackgroundBitmap);
         Button rulesButton = (Button) findViewById(R.id.rules_button);
         popUp = new PopupWindow(this);
@@ -78,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
     }
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -98,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PlayActivity.class);
         startActivity(intent);
     }
-
     public void settingsButton(View view) {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
